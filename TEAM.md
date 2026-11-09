@@ -12,10 +12,10 @@
 
 | STT | Họ và tên      | MSSV        | Vai trò trong nhóm                                                       | Tài khoản GitHub |
 | --: | -------------- | ----------- | ------------------------------------------------------------------------ | ---------------- |
-|   1 | Thiều Thế Ngọc | 2A202603788 | Ghi chép, Phản biện, Phỏng vấn kiểm chứng, research, phân công công việc | BFNGOC2          |
-|   2 | Vũ Tuấn Đạt               | 2A202603744           | Vẽ quy trình, viết Problem Statement, phản biện, phụ giúp nhóm trưởng các task khác                        | datkunal                 |
-|   3 |                |             |                                                                          |                  |
-|   4 |                |             |                                                                          |                  |
+|   1 | Thiều Thế Ngọc     | 2A202603788 | Ghi chép, Phản biện, Phỏng vấn kiểm chứng, research, phân công công việc                                            | BFNGOC2          |
+|   2 | Vũ Tuấn Đạt        | 2A202603744 | Vẽ quy trình, viết Problem Statement, phản biện, phụ giúp nhóm trưởng các task khác                                 | datkunal         |
+|   3 | Trần Trọng Đức Tài | 2A202603732 | Phản biện, Thiết kế quy trình tương lai (4.2), Phân tích mức can thiệp AI (6.2), Problem Statement v1 & Eval (7), Hạn chế & Hướng tiếp theo (9) | DucTai2804       |
+|   4 |                    |             |                                                                                                                     |                  |
 
 Không ghi email hay số điện thoại vào bảng này, vì repo có thể để public.
 
@@ -68,14 +68,25 @@ Mỗi thành viên thêm một mục theo mẫu dưới đây, tiêu đề là `
 
 - **Điều mình học được từ phần nhóm:**
 
-### Trần Trọng Đức Tài-MSSV
+### Trần Trọng Đức Tài-2A202603732
 
-**Phần việc phụ trách:**
+**Phần việc phụ trách:** Thiết kế quy trình tương lai (mục 4.2), phân tích và so sánh 4 mức can thiệp AI (mục 6.2), hoàn thiện Problem Statement v1 kèm 4 tiêu chí đánh giá đầu ra AI (mục 7), tổng kết hạn chế và hướng phát triển tiếp theo (mục 9), tham gia phản biện ở CP3 và CP5.
 
 - **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+  - Pitch 3 Problem Cards cá nhân (Checklist repo, Họp nhóm, Tra cứu lịch học) và đặt câu hỏi phản biện trọng tâm cho bài Candidate #2 (Ngọc) về bối cảnh mã nguồn / giới hạn token, Candidate #7 (Đạt) và #8 (Đạt), giúp nhóm hội tụ đúng vào Candidate #2.
+  - Thiết kế quy trình tương lai 5 bước (mục 4.2): bóc tách rõ vai trò giữa Con người, Rule và AI; xác lập ranh giới an toàn (Boundary: AI không tự commit/ghi đè code, chỉ nhận context liên quan) và quy trình quay về (Rollback).
+  - So sánh 4 mức can thiệp (No AI, Rule, Workflow, Agent) ở mục 6.2; lập luận chặt chẽ lý do chọn Workflow (HITL) và từ chối Rule hay Agent.
+  - Xây dựng Problem Statement v1 với 9 trường hoàn chỉnh (mục 7), lập bảng giải thích 5 điểm thay đổi cốt lõi so với v0, thiết lập 4 tiêu chí đánh giá đầu ra của AI (Groundedness, Precision, Actionability, Safety).
+  - Viết mục 9 (Hạn chế và hướng tiếp theo): chỉ rõ 3 hạn chế thực nghiệm và đề xuất 3 bước triển khai cụ thể (Viability check, Pilot 1 tuần, POC CLI Tool).
 
 - **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+  - `group_report.md`: mục 4.2 (Quy trình tương lai), mục 6.2 (So sánh 4 mức can thiệp AI), mục 7 (Problem Statement v1 & tiêu chí đánh giá), mục 9 (Hạn chế và hướng tiếp theo).
+  - Các commit trên GitHub repository:
+    - Commit `7f56a28`: `docs(team): bo sung muc 4.2 quy trinh tuong lai vao group_report`
+    - Commit `4a859c4`: `docs(team): hoan thien muc 6.2 so sanh 4 muc can thiep AI`
+    - Commit `8d0165c`: `docs(team): hoan thien muc 7 problem statement v1 va muc 9 han che huong tiep theo`
+  - Báo cáo cá nhân: `report/individual/2A202603732_TranTrongDucTai.md`.
 
 - **Điều mình học được từ phần nhóm:**
-
--
+  - Hiểu sâu sắc rằng ứng dụng AI không phải là "thần thánh hóa" giao toàn quyền cho Agent làm từ A-Z, mà giá trị thực tế nằm ở việc xác định đúng điểm nghẽn (bottleneck) và phân định ranh giới (boundary) an toàn giữa Rule, AI và Con người (HITL).
+  - Nhận ra tầm quan trọng của việc phản biện: Ban đầu ai cũng nghĩ đến giải pháp của mình hoặc muốn xây dựng giải pháp lớn, nhưng qua phản biện và phỏng vấn thực tế, nhóm đã gọt giũa được một bài toán sắc bén, khả thi và có thể đo lường rõ ràng.
