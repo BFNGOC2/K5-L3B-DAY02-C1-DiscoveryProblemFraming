@@ -162,8 +162,39 @@ HIỆN TẠI — bug nhỏ 10–20 phút, bug lớn 1–2 giờ (ước lượng
 Ghi rõ bước nào **Rule**, bước nào **AI**, bước nào **con người**, **boundary** ở đâu, **phương án quay về** khi AI sai.
 
 ```text
+TƯƠNG LAI — Kỳ vọng giảm 50–70% thời gian tìm nguyên nhân
 
+[1 Lấy log/traceback khi gặp lỗi] (CON NGƯỜI kích hoạt / RULE bắt lỗi: 10s)
+  ↓
+[2 Đọc log, tự động bóc tách điểm lỗi: file, dòng, exception] (RULE: 5s)
+  ↓
+[3 Tự động trích xuất các file tham chiếu liên quan + AI khoanh vùng nguyên nhân] (RULE + AI: 30s)
+  ↓
+[4 AI đề xuất giả thuyết nguyên nhân & hướng xử lý → Dev thẩm định, chọn hướng] (AI + CON NGƯỜI: 5–7') ← BOUNDARY
+  ↓
+[5 Áp dụng bản sửa + Rule chạy test kiểm tra lại] (CON NGƯỜI + RULE: 1–2')
+  ├── Nếu test pass: Hoàn thành
+  └── Nếu test fail / AI đoán sai: Kích hoạt [PHƯƠNG ÁN QUAY VỀ] (Rollback về bước 3 thủ công)
 ```
+
+**Phân định vai trò chi tiết:**
+- **Bước 1 — Con người / Rule:** Developer gặp lỗi khi chạy/test và kích hoạt công cụ hỗ trợ debug (hoặc plugin tự động bắt lỗi từ console).
+- **Bước 2 — Rule:** Script/Regex tự động bóc tách traceback sạch: xác định tên exception, file và số dòng nghi ngờ trong mã nguồn dự án, loại bỏ các dòng log rác từ thư viện bên ngoài.
+- **Bước 3 — Rule + AI (Giải quyết Bottleneck chính):**
+  - *Rule:* Tự động quét call stack và nhặt đúng nội dung các hàm/file tham chiếu liên quan trong dự án (che các thông tin nhạy cảm như API key/password).
+  - *AI:* Đọc traceback kết hợp với context các file tham chiếu do Rule cung cấp để tái hiện luồng chạy và chỉ ra nguyên nhân gốc.
+- **Bước 4 — AI + Con người (Human-in-the-loop — HITL):**
+  - *AI:* Sinh ra giả thuyết nguyên nhân bằng tiếng Việt ngắn gọn và đề xuất 1–2 hướng xử lý cụ thể (kèm code diff minh họa).
+  - *Developer:* Đọc giải thích, đối chiếu với logic nghiệp vụ thực tế để thẩm định giả thuyết của AI và chọn hướng xử lý phù hợp.
+- **Bước 5 — Con người + Rule:** Developer áp dụng code sửa; Rule tự động kích hoạt test runner (unit test/linter) để xác nhận lỗi đã được khắc phục hoàn toàn.
+
+**Boundary (Ranh giới an toàn):**
+1. AI **tuyệt đối không được tự ý ghi đè file mã nguồn hay tự động commit git**; mọi thay đổi code bắt buộc phải qua bước Developer thẩm định và chấp thuận (Bước 4).
+2. AI **chỉ được cung cấp các đoạn code trong các file tham chiếu liên quan trực tiếp đến traceback**, không được nạp toàn bộ mã nguồn dự án để đảm bảo bảo mật và không vượt context window.
+3. Gợi ý của AI **chỉ được coi là giả thuyết tham khảo**, không được coi là kết luận tuyệt đối.
+
+**Phương án quay về (Rollback / Fallback):**
+- Nếu giả thuyết của AI sai lệch hoặc code sửa làm phát sinh lỗi mới (lỗi chồng lỗi / test fail): Developer bấm nút Rollback để hủy bỏ toàn bộ thay đổi, khôi phục mã nguồn về trạng thái ban đầu, tạm dừng gợi ý của AI và quay lại Bước 3 của quy trình thủ công (tự đặt log/breakpoint để lần theo file như ở 4.1).
 
 ### 4.3. Before / after
 
