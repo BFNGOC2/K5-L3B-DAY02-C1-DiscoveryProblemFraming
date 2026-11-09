@@ -273,31 +273,36 @@ Vì Agent quá rủi ro về mặt an toàn mã nguồn, chi phí token cao và 
 
 ## 7. Problem Statement v1 + tiêu chí đánh giá (CP6)
 
-| Trường                                          | Nội dung                        |
-| ----------------------------------------------- | ------------------------------- |
-| **Actor**                                       |                                 |
-| **Quy trình**                                   |                                 |
-| **Bottleneck**                                  |                                 |
-| **Impact**                                      |                                 |
-| **Success Metric** (baseline → target, cách đo) |                                 |
-| **Boundary**                                    |                                 |
-| **AI intervention point**                       |                                 |
-| **Mức chọn**                                    | No AI / Rule / Workflow / Agent |
-| **Rủi ro & người kiểm tra**                     |                                 |
+| Trường                                          | Nội dung                                                                                                                                                                                                                                           |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Actor**                                       | Developer (đặc biệt là junior và mid-level) đang phát triển hoặc bảo trì mã nguồn trong các dự án có cấu trúc nhiều module/file phụ thuộc.                                                                                                        |
+| **Quy trình**                                   | Khi gặp lỗi runtime: Kích hoạt tool → Rule lọc traceback sạch → Rule trích xuất các hàm/file tham chiếu liên quan + AI phân tích luồng chạy và gợi ý giả thuyết nguyên nhân & code diff → Developer thẩm định (HITL) → Rule chạy test kiểm tra. |
+| **Bottleneck**                                  | Lần mò stack trace và mở từng file tham chiếu trong call stack để truy ngược luồng dữ liệu lỗi (Call Stack Navigation): mất 5–15 phút (với bug nhỏ) và 30–60+ phút (với bug lớn/nhiều tầng gọi).                                                    |
+| **Impact**                                      | Tốn 10–20 phút/bug nhỏ, 1–2 giờ/bug lớn (tần suất 3–5 bug/ngày); làm gián đoạn luồng tư duy (flow state); nguy cơ "lỗi chồng lỗi" làm vỡ logic hệ thống nếu chẩn đoán sai bản chất.                                                             |
+| **Success Metric** (baseline → target, cách đo) | (1) Giảm 50–70% thời gian ở bước khoanh vùng nguyên nhân (từ 10–20' xuống <5–7' với bug nhỏ; từ 1–2h xuống <20–25' với bug lớn); (2) Tỷ lệ dev chấp thuận giả thuyết của AI ≥ 70%; (3) 0% lỗi mới phát sinh (test runner pass 100%). Đo trên 15–20 bug trong 1 tuần pilot. |
+| **Boundary**                                    | AI **tuyệt đối không tự ý sửa file hay commit git**; AI **chỉ nhận snippet code liên quan trực tiếp đã mask secret** (không gửi cả repo); gợi ý của AI **chỉ là giả thuyết tham khảo** (bắt buộc Developer thẩm định HITL).                    |
+| **AI intervention point**                       | Ở Bước 3 và Bước 4: Sau khi Rule đã tiền xử lý traceback và gom context các file tham chiếu liên quan; trước khi Developer quyết định sửa code.                                                                                                   |
+| **Mức chọn**                                    | **Workflow** (Quy trình bán tự động có con người kiểm duyệt — Human-in-the-loop).                                                                                                                                                                  |
+| **Rủi ro & người kiểm tra**                     | AI ảo giác/suy luận sai logic gây "lỗi chồng lỗi", rò rỉ mã nguồn nhạy cảm → Developer thẩm định logic nghiệp vụ (Bước 4); Test runner tự động xác minh code (Bước 5); Rule tiền xử lý lọc mask secrets trước khi gửi AI (Bước 3).            |
 
 **Thay đổi so với v0 và lý do:**
 
-| Trường | v0  | v1  | Vì sao đổi |
-| ------ | --- | --- | ---------- |
-|        |     |     |            |
+| Trường | v0 (Dự thảo ban đầu từ Problem Card) | v1 (Sau phỏng vấn & thiết kế Workflow) | Vì sao đổi |
+| --- | --- | --- | --- |
+| **Actor** | Developer chung chung gặp lỗi khi code | Developer làm việc trong dự án có nhiều module/file phụ thuộc | Phỏng vấn cho thấy lỗi cú pháp/đơn giản thì compiler/linter bắt ngay (Rule là đủ), pain chỉ xuất hiện khi lỗi liên quan nhiều file tham chiếu. |
+| **Bottleneck** | "Không biết cách sửa lỗi" | "Tốn nhiều thời gian đọc log và lần mò các file tham chiếu trong stack trace để khoanh vùng nguyên nhân" | Phỏng vấn chỉ rõ dev biết cách sửa nhưng mất nhiều thời gian nhất ở khâu đọc trace và mở từng file liên quan để truy ngược luồng dữ liệu. |
+| **Success Metric** | Chỉ đo chung chung: "Giảm 50% thời gian debug" | Đo 3 tiêu chí: (1) Giảm 50–70% thời gian tìm nguyên nhân; (2) Tỷ lệ chấp thuận giả thuyết ≥ 70%; (3) 0% lỗi chồng lỗi (test pass 100%) | Nhanh hơn nhưng sửa sai gây "lỗi chồng lỗi" thì còn tệ hơn baseline; cần kiểm soát cả độ chính xác và an toàn code. |
+| **Boundary** | AI không tự commit code lên git | Bổ sung: AI không tự ghi đè file, không nạp toàn bộ repo (chỉ gửi context liên quan đã mask secret), gợi ý chỉ là giả thuyết có dẫn chứng | Phân tích câu hỏi Google PAIR: Developer coi trọng tính an toàn, tránh báo nhầm và cần bảo mật mã nguồn dự án. |
+| **Mức can thiệp** | Chưa xác định rõ (cân nhắc Tool hoặc Agent) | Chốt mức **Workflow** (Human-in-the-loop) | Rule không đủ cho logic runtime; Agent quá rủi ro về bảo mật, chi phí và nguy cơ "sửa lụi" làm hỏng codebase. |
 
 **Tiêu chí đánh giá đầu ra của AI (3–5 tiêu chí):**
 
 |   # | Tiêu chí | Đạt khi | Không đạt khi |
 | --: | -------- | ------- | ------------- |
-|   1 |          |         |               |
-|   2 |          |         |               |
-|   3 |          |         |               |
+|   1 | **Tính có căn cứ (Groundedness / Căn cứ dòng lỗi)** | Mọi giả thuyết nguyên nhân đều trích dẫn chính xác dòng code, tên biến, hàm có thật trong traceback và context file tham chiếu. | Đưa ra nhận định suy đoán chung chung, bịa ra tên biến/hàm hoặc file không hề tồn tại trong dự án (hallucination). |
+|   2 | **Tránh báo nhầm (Precision / Thận trọng khi thiếu dữ kiện)** | Khi context chưa đủ hoặc lỗi mơ hồ, AI nêu rõ "chưa đủ căn cứ" và đề xuất dev kiểm tra thêm log/biến cụ thể thay vì đoán mò. | Khẳng định chắc chắn một nguyên nhân sai, khiến dev sửa lệch hướng dẫn tới "lỗi chồng lỗi". |
+|   3 | **Tính hành động được & Dễ hiểu (Actionability & Explainability)** | Giải thích ngắn gọn luồng chạy gây lỗi bằng tiếng Việt (dưới 200 từ) và đề xuất 1–2 code diff cụ thể, đọc hiểu và áp dụng được ngay. | Giải thích lan man, lý thuyết hàn lâm, không có code diff minh họa hoặc code diff sai cú pháp. |
+|   4 | **Tính an toàn & Bảo mật context (Safety & Privacy)** | Không yêu cầu hoặc xử lý các chuỗi nhạy cảm (API key, token, mật khẩu, PII); code diff không xóa bỏ test assertions để "vượt qua test". | Gợi ý sửa code bằng cách xóa assert/bỏ qua exception; hoặc đòi hỏi nạp toàn bộ mã nguồn/thông tin nhạy cảm lên prompt. |
 
 ---
 
@@ -330,7 +335,17 @@ Vì Agent quá rủi ro về mặt an toàn mã nguồn, chi phí token cao và 
 
 ## 9. Hạn chế và hướng tiếp theo
 
--
+### 9.1. Hạn chế của nghiên cứu hiện tại
+- **Mẫu dữ liệu thực nghiệm còn nhỏ:** Dữ liệu về quy trình debug và các con số đo lường (10–20 phút với bug nhỏ, 1–2 giờ với bug lớn, tần suất 3–5 bug/ngày) mới chỉ dựa trên phỏng vấn sâu 1 developer; chưa có số liệu log bấm giờ thực tế trên nhiều developer và đa dạng ngôn ngữ/framework khác nhau (giả định #1, #2 trong Assumption Map).
+- **Rủi ro Viability còn ở mức Cao:** Chưa kiểm chứng chính thức chính sách bảo mật thông tin (Security & IP Policy) của các tổ chức/doanh nghiệp về việc đưa log và các đoạn mã nguồn lên các mô hình LLM thương mại bên ngoài qua Cloud API (giả định #6).
+- **Giới hạn phạm vi bài toán:** Thiết kế hiện tại mới giải quyết tối ưu cho các lỗi runtime cục bộ trong cùng một repository (monolith / single service), chưa xử lý được các hệ thống phân tán phức tạp (microservices, lỗi mạng bất đồng bộ, race condition đa luồng giữa nhiều dịch vụ).
+
+### 9.2. Hướng triển khai tiếp theo (Next Steps)
+- **Kiểm chứng chính sách bảo mật (Ưu tiên số 1):** Làm việc với Tech Lead / bộ phận Security để làm rõ ranh giới chia sẻ dữ liệu mã nguồn. Nếu tổ chức cấm đưa code ra ngoài, nghiên cứu phương án tích hợp mô hình ngôn ngữ mã nguồn mở chạy local (như Qwen2.5-Coder hoặc DeepSeek-Coder chạy qua Ollama/vLLM tại máy dev).
+- **Đo lường baseline chuẩn xác qua Pilot 1 tuần:** Tổ chức ghi chép và bấm giờ thực tế trên 15–20 bug liên tiếp của nhóm phát triển để có số liệu baseline đáng tin cậy thay vì số ước lượng từ trí nhớ.
+- **Xây dựng bản thử nghiệm tối thiểu (POC CLI Tool):**
+  - Viết 1 script Python nhỏ gọn hoạt động tại terminal: nhận traceback → dùng Regex bóc tách danh sách file nội bộ trong call stack → tự động trích xuất 20–30 dòng code xung quanh vị trí lỗi (đã mask secret) → ghép prompt chuẩn gửi đến LLM.
+  - Đánh giá chất lượng bản nháp giả thuyết và code diff dựa trên **4 tiêu chí đánh giá** đã thiết lập ở Mục 7 để đo tỷ lệ chấp thuận (Acceptance Rate) trước khi tích hợp sâu thành VS Code Extension.
 
 ## 10. Tài liệu tham khảo
 
