@@ -98,34 +98,34 @@ Giả định nhóm kiểm chứng trong buổi này: Trước tiên xác nhận
 
 ### 3.2. Kiểm chứng
 
-Cách đã dùng: Phỏng vấn / Survey / Log, ticket, review
+**Cách đã dùng:** Phỏng vấn nhanh 1 developer; snapshot dưới đây là một mẫu định tính, chưa đại diện cho toàn bộ developer.
 
 Interview snapshot (mỗi buổi phỏng vấn một bảng, hoặc đặt file trong `report/assets/cp4-interview-snapshot-N.md`):
 
 | Trường                                            | Nội dung |
 | ------------------------------------------------- | -------- |
-| Người được hỏi (vai trò, không ghi tên thật)      |          |
-| Câu nói đáng nhớ nhất (nguyên văn)                |          |
-| Lần gần nhất gặp vấn đề này: chuyện gì đã xảy ra? |          |
-| Hiện đang xử lý bằng cách nào (workaround)?       |          |
-| Mất bao lâu, bao lần?                             |          |
-| Insight / opportunity rút ra                      |          |
+| Người được hỏi (vai trò, không ghi tên thật)      | Developer (Dev); phỏng vấn ngày 09/11/2026. |
+| Câu nói đáng nhớ nhất (nguyên văn)                | “Không tìm đúng lỗi để sửa nó sẽ phát sinh lỗi chồng lỗi.” |
+| Lần gần nhất gặp vấn đề này: chuyện gì đã xảy ra? | Ngày 09/11/2026, Dev gặp một bug và phải lần theo log cùng các file liên quan để tìm nguyên nhân. |
+| Hiện đang xử lý bằng cách nào (workaround)?       | Tìm nguyên nhân bug theo từng log và truy vấn các file tham chiếu. |
+| Mất bao lâu, bao lần?                             | Ước lượng của người được hỏi: 10–20 phút cho bug nhỏ, 1–2 giờ cho bug lớn; chưa có nhật ký bấm giờ để đối chiếu. |
+| Insight / opportunity rút ra                      | Developer mất nhiều thời gian xác định đúng nguyên nhân; sửa sai có thể gây lỗi chồng lỗi. Cơ hội là hỗ trợ phân tích log, tìm code liên quan và đề xuất hướng xử lý kèm bước xác minh, nhưng developer vẫn phải kiểm tra trước khi sửa. |
 
 Tổng hợp:
 
 | Nguồn | Số người / số mẫu | Tín hiệu xác nhận | Tín hiệu phản bác |
 | ----- | ----------------: | ----------------- | ----------------- |
-|       |                   |                   |                   |
+| Phỏng vấn developer (snapshot 09/11/2026) | 1 | Việc tìm nguyên nhân hiện cần lần theo từng log và các file liên quan; người được hỏi nhận định sửa khi chưa tìm đúng lỗi có thể gây lỗi chồng lỗi. Điều này ủng hộ giả định rằng việc khoanh vùng nguyên nhân là một pain point đáng khảo sát. | Thời gian tự ước lượng là 10–20 phút/bug nhỏ và 1–2 giờ/bug lớn, không khớp với giả định ban đầu 20–45 phút cho mỗi lỗi nếu áp dụng chung cho mọi bug. Chưa có bằng chứng về tần suất 3–5 lỗi/ngày; một cuộc phỏng vấn không đủ đại diện để kết luận cho nhóm developer. |
 
 **Nhóm đã sửa problem thế nào sau kiểm chứng:**
+
+Thu hẹp problem từ giả định ban đầu “debug lỗi mất 20–45 phút/lỗi” thành vấn đề cần kiểm chứng cụ thể hơn: developer tốn thời gian lần theo log và code liên quan để tìm nguyên nhân; thời gian tự ước lượng khác nhau theo độ lớn của bug (10–20 phút với bug nhỏ, 1–2 giờ với bug lớn). Cập nhật hướng hỗ trợ thành phân tích log/context, truy tìm code liên quan và đề xuất bước kiểm tra; không coi gợi ý là kết luận hay để AI tự sửa. Chưa đủ dữ liệu để xác nhận tần suất lỗi, baseline đại diện, hoặc bottleneck luôn nằm ở phân tích log; cần ghi thời gian trên nhiều lỗi và hỏi thêm developer.
 
 ### 3.3. Research giải pháp đã có
 
 | Công cụ / case / pattern | Link | Giải bước nào trong quy trình? | Điểm mạnh | Khoảng trống / rủi ro | Bài học cho nhóm |
 | ------------------------ | ---- | ------------------------------ | --------- | --------------------- | ---------------- |
-|                          |      |                                |           |                       |                  |
-|                          |      |                                |           |                       |                  |
-|                          |      |                                |           |                       |                  |
+| GitHub Copilot | [GitHub Copilot Chat trong IDE](https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/chat-with-copilot/chat-in-ide) | Phân tích lỗi, đọc code liên quan, xác định nguyên nhân và đề xuất hướng sửa. | Tích hợp trong IDE, tận dụng repository context, hỗ trợ trực tiếp trong workflow của developer. | Có thể thiếu context nên gợi ý vẫn cần developer kiểm chứng. | Cần kết hợp error log với code liên quan, không chỉ phân tích log độc lập. |
 
 ---
 

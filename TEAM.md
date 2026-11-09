@@ -4,18 +4,18 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Candidate problem nhóm chọn (1 câu):
+- Tên nhóm: C1
+- Candidate problem nhóm chọn (1 câu): Debug lỗi: khi gặp lỗi trong quá trình phát triển, developer muốn xác định nguyên nhân và hướng khắc phục để giảm thời gian debug.
 - Quyết định cuối (Go / Not Yet / No-Go):
 
 ## Thành viên
 
-| STT | Họ và tên | MSSV | Vai trò trong nhóm | Tài khoản GitHub |
-|---:|---|---|---|---|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
+| STT | Họ và tên      | MSSV        | Vai trò trong nhóm                                                       | Tài khoản GitHub |
+| --: | -------------- | ----------- | ------------------------------------------------------------------------ | ---------------- |
+|   1 | Thiều Thế Ngọc | 2A202603788 | Ghi chép, Phản biện, Phỏng vấn kiểm chứng, research, phân công công việc | BFNGOC2          |
+|   2 |                |             |                                                                          |                  |
+|   3 |                |             |                                                                          |                  |
+|   4 |                |             |                                                                          |                  |
 
 Không ghi email hay số điện thoại vào bảng này, vì repo có thể để public.
 
@@ -23,34 +23,52 @@ Gợi ý vai trò (một người có thể giữ nhiều vai): điều phối t
 
 ## Phân công theo checkpoint
 
-| Checkpoint | Người chính | Người hỗ trợ | Sản phẩm |
-|---|---|---|---|
-| CP3 — Hội tụ nhóm | | | Cluster, cây OST, bảng chấm điểm |
-| CP4 — Kiểm chứng | | | Assumption map, snapshot hoặc survey |
-| CP4 — Research | | | Bảng research có link |
-| CP5 — Quy trình trước/sau | | | Quy trình + bảng before/after |
-| CP5 — Problem Statement v0 | | | Problem Statement v0 |
-| CP6 — Mức can thiệp + Problem Statement v1 | | | Ma trận, AI Canvas, eval, Problem Statement v1 |
-| CP6 — Quyết định | | | 4 rủi ro + Go/Not Yet/No-Go |
+| Checkpoint                                 | Người chính | Người hỗ trợ | Sản phẩm                                       |
+| ------------------------------------------ | ----------- | ------------ | ---------------------------------------------- |
+| CP3 — Hội tụ nhóm                          |             |              | Cluster, cây OST, bảng chấm điểm               |
+| CP4 — Kiểm chứng                           |             |              | Assumption map, snapshot hoặc survey           |
+| CP4 — Research                             |             |              | Bảng research có link                          |
+| CP5 — Quy trình trước/sau                  |             |              | Quy trình + bảng before/after                  |
+| CP5 — Problem Statement v0                 |             |              | Problem Statement v0                           |
+| CP6 — Mức can thiệp + Problem Statement v1 |             |              | Ma trận, AI Canvas, eval, Problem Statement v1 |
+| CP6 — Quyết định                           |             |              | 4 rủi ro + Go/Not Yet/No-Go                    |
 
 ## Cá nhân
 
 Mỗi thành viên thêm một mục theo mẫu dưới đây, tiêu đề là `HoVaTen-MSSV`.
 
-### HoVaTen-MSSV
+### Thiều Thế Ngọc-2A202603788
 
 **Phần việc phụ trách:**
 
--
+- **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
 
-**Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+- **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
 
--
-
-**Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+- **Điều mình học được từ phần nhóm:**
 
 -
 
-**Điều mình học được từ phần nhóm:**
+### Vũ Tuấn Đạt-MSSV
+
+**Phần việc phụ trách:**
+
+- **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+
+- **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+
+- **Điều mình học được từ phần nhóm:**
+
+-
+
+### Trần Trọng Đức Tài-MSSV
+
+**Phần việc phụ trách:**
+
+- **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+
+- **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+
+- **Điều mình học được từ phần nhóm:**
 
 -
