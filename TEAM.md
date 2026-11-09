@@ -13,7 +13,7 @@
 | STT | Họ và tên      | MSSV        | Vai trò trong nhóm                                                       | Tài khoản GitHub |
 | --: | -------------- | ----------- | ------------------------------------------------------------------------ | ---------------- |
 |   1 | Thiều Thế Ngọc | 2A202603788 | Ghi chép, Phản biện, Phỏng vấn kiểm chứng, research, phân công công việc | BFNGOC2          |
-|   2 |                |             |                                                                          |                  |
+|   2 | Vũ Tuấn Đạt               | 2A202603744           | Vẽ quy trình, viết Problem Statement, phản biện, phụ giúp nhóm trưởng các task khác                        | datkunal                 |
 |   3 |                |             |                                                                          |                  |
 |   4 |                |             |                                                                          |                  |
 
@@ -49,17 +49,24 @@ Mỗi thành viên thêm một mục theo mẫu dưới đây, tiêu đề là `
 
 -
 
-### Vũ Tuấn Đạt-MSSV
+### Vũ Tuấn Đạt-2A202603744
 
-**Phần việc phụ trách:**
+**Phần việc phụ trách:** Vẽ quy trình, viết Problem Statement, phản biện; gom cluster và cây OST ở CP3; phụ giúp nhóm trưởng các task khác.
 
 - **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+  - Gom nhóm 9 candidate thành các cluster và dựng cây OST (CP3).
+  - Đặt câu hỏi phản biện cho candidate #1, #3, #5 của các bạn; nhận và trả lời phản biện #7, #8, #9 cho candidate của mình.
+  - Điền quy trình hiện tại của bài debug lỗi (mục 4.1): sơ đồ, bảng 5 bước, bottleneck.
+  - Xác định ô của bài trong ma trận độ mơ hồ × độ phức tạp (mục 6.1).
+  - Trả lời hai câu hỏi PAIR về augment/automate và báo nhầm/bỏ sót (mục 6.4).
+  - Đánh giá bốn rủi ro Value / Usability / Feasibility / Viability (mục 8.1).
 
 - **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+  - `group_report.md`: mục 2.2 và 2.3 (cluster, cây OST), 4.1, 6.1, 6.4, 8.1.
+  - Commit `7ce87b4` ("docs: điền mục 4.1, 6.1, 6.4, 8.1 của báo cáo nhóm").
+  - Báo cáo cá nhân: `report/individual/2A202603744_VuTuanDat.md`.
 
 - **Điều mình học được từ phần nhóm:**
-
--
 
 ### Trần Trọng Đức Tài-MSSV
 
