@@ -240,14 +240,18 @@ Vì sao:
 
 | Mức                       | Phương án cho bài của nhóm | Đủ khi nào | Rủi ro | Chọn? |
 | ------------------------- | -------------------------- | ---------- | ------ | ----- |
-| **No AI** (sửa quy trình) |                            |            |        |       |
-| **Rule**                  |                            |            |        |       |
-| **Workflow**              |                            |            |        |       |
-| **Agent**                 |                            |            |        |       |
+| **No AI** (sửa quy trình) | Bắt buộc viết tài liệu quy chuẩn code nghiêm ngặt, quy định viết Unit Test 100% và review chéo trước khi merge | Đủ với các dự án nhỏ, cấu trúc đơn giản, ít phụ thuộc bên ngoài và team tuân thủ chặt chẽ TDD | Không ngăn được các bug logic runtime phát sinh do dữ liệu thực tế biến thiên; làm chậm tiến độ release sản phẩm | Không |
+| **Rule**                  | Dùng Linter (ESLint, Flake8), Static Code Analysis (SonarQube) và Regex bóc tách traceback | Đủ với các lỗi cú pháp (syntax error), vi phạm quy chuẩn format hoặc biến chưa khai báo | Bất lực hoàn toàn trước lỗi logic luồng dữ liệu nghiệp vụ (ví dụ: hàm A trả về dữ liệu sai cấu trúc ở bước 1 làm hàm B crash ở bước 4) | Chỉ dùng ở khâu tiền xử lý (bước 2) |
+| **Workflow**              | **Rule** lọc traceback sạch & trích xuất code liên quan → **AI** phân tích luồng chạy & gợi ý code diff → **Dev** thẩm định duyệt → **Rule** chạy test | Đủ khi quy trình gồm các bước tuần tự cố định; AI chỉ làm khâu "suy luận nguyên nhân" và "đề xuất giải pháp", con người giữ quyền quyết định (HITL) | AI có thể sinh ảo giác (hallucination) hoặc gợi ý chưa tối ưu; kiểm soát chặt bằng bước Dev review và Test runner tự động | **CÓ (CHỌN)** |
+| **Agent**                 | AI tự đọc lỗi, tự duyệt toàn bộ repo, tự sửa file mã nguồn, tự chạy test và tự commit git | Đủ khi hệ thống có bộ test suite bao phủ 100% và môi trường sandbox cô lập hoàn hảo, cho phép agent chạy thử - sai tự do | Rất dễ rò rỉ mã nguồn; chi phí token cực lớn; AI có thể "sửa lụi" bằng cách xóa bỏ assertion của test để test pass; dev mất quyền kiểm soát code | Không |
 
-**Mức chọn:**
+**Mức chọn:** **Workflow (Quy trình bán tự động có con người kiểm duyệt — Human-in-the-loop)**.
 
-**Vì sao không chọn mức đơn giản hơn:**
+**Vì sao không chọn mức đơn giản hơn:** 
+Vì No AI hay Rule thuần túy chỉ bắt được lỗi tĩnh (static pattern) đã biết trước. Những bug ngốn 20–45 phút (hoặc 1–2 giờ) của dev là lỗi runtime và luồng dữ liệu biến thiên, bắt buộc cần năng lực suy luận ngữ cảnh (contextual reasoning) của mô hình ngôn ngữ lớn (LLM).
+
+**Vì sao không chọn mức phức tạp hơn:** 
+Vì Agent quá rủi ro về mặt an toàn mã nguồn, chi phí token cao và độ trễ lớn khi phải duyệt qua nhiều file. Hơn nữa, kết quả phỏng vấn developer cho thấy người dùng muốn giữ quyền kiểm soát để tránh "lỗi chồng lỗi", từ chối việc để AI tự ý can thiệp mã nguồn dự án mà không có sự kiểm duyệt của con người.
 
 ### 6.3. AI Canvas rút gọn
 
