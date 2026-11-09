@@ -6,7 +6,7 @@
 
 - Tên nhóm: C1
 - Candidate problem nhóm chọn (1 câu): Debug lỗi: khi gặp lỗi trong quá trình phát triển, developer muốn xác định nguyên nhân và hướng khắc phục để giảm thời gian debug.
-- Quyết định cuối (Go / Not Yet / No-Go):
+- Quyết định cuối (Go / Not Yet / No-Go): Not Yet
 
 ## Thành viên
 
@@ -25,13 +25,13 @@ Gợi ý vai trò (một người có thể giữ nhiều vai): điều phối t
 
 | Checkpoint                                 | Người chính | Người hỗ trợ | Sản phẩm                                       |
 | ------------------------------------------ | ----------- | ------------ | ---------------------------------------------- |
-| CP3 — Hội tụ nhóm                          |             |              | Cluster, cây OST, bảng chấm điểm               |
-| CP4 — Kiểm chứng                           |             |              | Assumption map, snapshot hoặc survey           |
-| CP4 — Research                             |             |              | Bảng research có link                          |
-| CP5 — Quy trình trước/sau                  |             |              | Quy trình + bảng before/after                  |
-| CP5 — Problem Statement v0                 |             |              | Problem Statement v0                           |
-| CP6 — Mức can thiệp + Problem Statement v1 |             |              | Ma trận, AI Canvas, eval, Problem Statement v1 |
-| CP6 — Quyết định                           |             |              | 4 rủi ro + Go/Not Yet/No-Go                    |
+| CP3 — Hội tụ nhóm                          | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Cluster, cây OST, bảng chấm điểm               |
+| CP4 — Kiểm chứng                           | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Assumption map, snapshot hoặc survey           |
+| CP4 — Research                             | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Bảng research có link                          |
+| CP5 — Quy trình trước/sau                  | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Quy trình + bảng before/after                  |
+| CP5 — Problem Statement v0                 | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Problem Statement v0                           |
+| CP6 — Mức can thiệp + Problem Statement v1 | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Ma trận, AI Canvas, eval, Problem Statement v1 |
+| CP6 — Quyết định                           | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | 4 rủi ro + Go/Not Yet/No-Go                    |
 
 ## Cá nhân
 
@@ -39,15 +39,20 @@ Mỗi thành viên thêm một mục theo mẫu dưới đây, tiêu đề là `
 
 ### Thiều Thế Ngọc-2A202603788
 
-**Phần việc phụ trách:**
+**Phần việc phụ trách:** Ghi chép, phản biện, tổng hợp kiểm chứng và research, lập bảng chấm điểm candidate, phối hợp phân công và hoàn thiện báo cáo nhóm.
 
 - **Đóng góp cụ thể** (mình đã làm gì, ra sản phẩm gì):
+  - Pitch ba candidate và tham gia chấm điểm để nhóm chọn bài debug lỗi.
+  - Tổng hợp snapshot phỏng vấn developer/sinh viên và kết quả hỏi nhanh; hệ thống hóa tín hiệu xác nhận, phản bác và giới hạn mẫu.
+  - Tổng hợp research GitHub Copilot và Sentry; hoàn thiện các phần before/after, Problem Statement v0, AI Canvas và quyết định Not Yet dựa trên nội dung/bằng chứng nhóm cung cấp.
 
 - **Bằng chứng** (phần nào trong `group_report.md`, file nào trong `report/assets/`, commit nào):
+  - `report/team/group_report.md`: mục 2.4, 3.2–3.3, 4.3, 5, 6.3, 8.2.
+  - `report/individual/2A202603788_ThieuTheNgoc.md`: mục 4–5.
 
 - **Điều mình học được từ phần nhóm:**
 
--
+- Học cách trình bày vấn đề với nhóm, tìm điểm nghẽn thực sự và thống nhất ý kiến giữa các thành viên.
 
 ### Vũ Tuấn Đạt-2A202603744
 
