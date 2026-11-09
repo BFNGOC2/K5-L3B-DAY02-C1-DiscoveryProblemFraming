@@ -88,5 +88,5 @@ Mỗi thành viên thêm một mục theo mẫu dưới đây, tiêu đề là `
   - Báo cáo cá nhân: `report/individual/2A202603732_TranTrongDucTai.md`.
 
 - **Điều mình học được từ phần nhóm:**
-  - Hiểu sâu sắc rằng ứng dụng AI không phải là "thần thánh hóa" giao toàn quyền cho Agent làm từ A-Z, mà giá trị thực tế nằm ở việc xác định đúng điểm nghẽn (bottleneck) và phân định ranh giới (boundary) an toàn giữa Rule, AI và Con người (HITL).
+  - Hiểu sâu sắc rằng ứng dụng AI không phải là thần thánh hóa giao toàn quyền cho Agent làm từ A-Z, mà giá trị thực tế nằm ở việc xác định đúng bottleneck và phân định ranh giới an toàn giữa Rule, AI và con người.
   - Nhận ra tầm quan trọng của việc phản biện: Ban đầu ai cũng nghĩ đến giải pháp của mình hoặc muốn xây dựng giải pháp lớn, nhưng qua phản biện và phỏng vấn thực tế, nhóm đã gọt giũa được một bài toán sắc bén, khả thi và có thể đo lường rõ ràng.
