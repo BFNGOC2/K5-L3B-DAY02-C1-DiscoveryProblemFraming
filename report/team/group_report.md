@@ -133,21 +133,29 @@ Thu hẹp problem từ giả định ban đầu “debug lỗi mất 20–45 ph�
 
 ### 4.1. Quy trình hiện tại
 
+> Căn cứ: phỏng vấn 1 developer ngày 09/11/2026 (lần theo log và các file tham chiếu để tìm nguyên nhân; bug nhỏ 10–20 phút, bug lớn 1–2 giờ, do người được hỏi tự ước lượng). Số phút từng bước và tần suất lỗi/ngày chưa có dữ liệu, ghi `[...]` để nhóm bấm giờ hoặc hỏi thêm. 
+
 Sơ đồ (ASCII, Mermaid hoặc link ảnh trong `report/assets/`):
 
 ```text
+HIỆN TẠI — bug nhỏ 10–20 phút, bug lớn 1–2 giờ (ước lượng của người được hỏi)
 
+[1 Nhận thấy lỗi + lấy log/traceback: [...]'] → [2 Đọc log, xác định điểm lỗi: [...]']
+→ [3 Truy các file tham chiếu để tìm nguyên nhân: [...]'] ← BOTTLENECK
+→ [4 Đưa ra giả thuyết nguyên nhân + hướng xử lý: [...]']
+→ [5 Sửa + kiểm tra lại: [...]']
+(nếu giả thuyết sai → quay lại bước 3; sửa sai có thể gây "lỗi chồng lỗi")
 ```
 
 | Bước | Actor | Input | Output | Thời gian / tần suất | Ghi chú |
 | ---: | ----- | ----- | ------ | -------------------- | ------- |
-|    1 |       |       |        |                      |         |
-|    2 |       |       |        |                      |         |
-|    3 |       |       |        |                      |         |
-|    4 |       |       |        |                      |         |
-|    5 |       |       |        |                      |         |
+|    1 | Developer | Lỗi khi chạy/phát triển (thông báo lỗi, test fail) | Log hoặc traceback của lỗi | [...] phút/lỗi; tần suất [...] lỗi/ngày (chưa có bằng chứng cho giả định 3–5 lỗi/ngày) | Cần xác nhận cách lấy log |
+|    2 | Developer | Log, traceback | Điểm lỗi nghi ngờ (file, dòng, thông báo) | [...] phút/lỗi | |
+|    3 | Developer | Điểm lỗi, các file tham chiếu liên quan | Hiểu luồng chạy dẫn tới lỗi, khoanh vùng nguyên nhân | [...] phút/lỗi; chiếm phần lớn thời gian theo phỏng vấn | Lần theo từng log và truy vấn từng file |
+|    4 | Developer | Kết quả khoanh vùng | Giả thuyết nguyên nhân và hướng xử lý | [...] phút/lỗi | Sai ở bước này dễ dẫn tới lỗi chồng lỗi |
+|    5 | Developer | Hướng xử lý đã chọn | Bản sửa đã kiểm tra | [...] phút/lỗi | Nếu không hết lỗi thì quay lại bước 3 |
 
-**Bottleneck chính:**
+**Bottleneck chính:** Bước 3, lần theo từng log và truy vấn các file tham chiếu để tìm đúng nguyên nhân. Dựa trên 1 phỏng vấn (chưa đại diện); cần bấm giờ từng bước trên nhiều lỗi để xác nhận bước 3 thật sự chiếm phần lớn thời gian.
 
 ### 4.2. Quy trình tương lai
 
@@ -188,9 +196,14 @@ Phản biện nhận được (từ AI hoặc nhóm khác) và nhóm có đồng
 
 ### 6.1. Ma trận độ mơ hồ × độ phức tạp
 
-Bài của nhóm nằm ở ô:
+Bài của nhóm nằm ở ô: **Độ mơ hồ trung bình đến khá × Độ phức tạp khá đến cao**. Ma trận chỉ có 2 mức (thấp/cao), nên nhóm đặt bài ở vùng nghiêng về phía **độ phức tạp cao**, với độ mơ hồ nằm giữa hai cột, không cực đoan.
 
 Vì sao:
+
+- **Độ mơ hồ trung bình đến khá:** một lỗi thường có vài nguyên nhân khả dĩ và hướng xử lý chấp nhận được khác nhau, nên không có đáp án cố định như phân loại vào nhóm có sẵn. Tuy vậy, lỗi có log/traceback, file tham chiếu và có thể kiểm chứng bằng cách chạy lại, nên kết quả đúng/sai vẫn xác minh được. Người được phỏng vấn cũng cho thấy sửa sai thì gây "lỗi chồng lỗi", tức là cần kiểm tra chứ không thể chọn tùy ý.
+- **Độ phức tạp khá đến cao:** quy trình hiện tại có từ 3 bước nối tiếp trở lên (lấy log → đọc log → truy file tham chiếu → giả thuyết → sửa/kiểm tra), dùng nhiều nguồn (log/traceback, các file tham chiếu, mã nguồn liên quan) và bước sau phụ thuộc kết quả bước trước (giả thuyết sai thì quay lại bước 3).
+- **Hàm ý theo ma trận:** độ phức tạp cao với độ mơ hồ không quá cao gợi ý **Workflow nhiều bước rõ ràng, chưa chắc cần Agent**. Nếu độ mơ hồ thực tế cao hơn thì mới cân nhắc Agent, kèm boundary, người kiểm tra và phương án quay về rất rõ. 
+
 
 ### 6.2. So sánh 4 mức
 
@@ -218,8 +231,8 @@ Vì sao:
 
 ### 6.4. Hai câu hỏi của Google PAIR
 
-- Người dùng muốn **được hỗ trợ (augment)** hay **giao hẳn việc (automate)**? Bằng chứng:
-- AI sai kiểu nào tệ hơn, **báo nhầm** hay **bỏ sót**? Vì sao, và thiết kế đã xử lý thế nào:
+- Người dùng muốn **được hỗ trợ (augment)** hay **giao hẳn việc (automate)**? Bằng chứng: **Augment.** Trong phỏng vấn developer, người được hỏi nói "Không tìm đúng lỗi để sửa nó sẽ phát sinh lỗi chồng lỗi", tức là họ coi việc xác định đúng nguyên nhân là then chốt và hậu quả của sai rất tốn kém; vì vậy việc tìm và quyết định nguyên nhân nên có developer kiểm tra, không nên giao hẳn cho AI tự sửa. Quy trình hiện tại cũng là developer tự lần theo log và các file tham chiếu, nên giá trị cần là rút ngắn bước đó chứ không thay thế. Lưu ý: bằng chứng mới từ 1 phỏng vấn, chưa hỏi trực tiếp "muốn được hỗ trợ hay giao hẳn"; cần xác nhận thêm với các developer khác (giả định #5 trong 3.1).
+- AI sai kiểu nào tệ hơn, **báo nhầm** hay **bỏ sót**? Vì sao, và thiết kế đã xử lý thế nào: **Báo nhầm tệ hơn.** Nếu AI đưa ra nguyên nhân sai với vẻ chắc chắn (báo nhầm), developer có thể sửa sai chỗ và gây ra "lỗi chồng lỗi" như người được hỏi lo ngại, mất thêm thời gian so với tự debug. Nếu AI bỏ sót (không chỉ ra được nguyên nhân thật), developer chỉ quay về cách làm hiện tại, không mất thêm so với baseline. Thiết kế nghiêng về tránh báo nhầm: (1) đưa ra giả thuyết kèm căn cứ (dòng log, file liên quan) để developer tự đối chiếu; (2) đề xuất bước xác minh trước khi sửa; (3) cho phép AI trả lời "chưa đủ căn cứ" thay vì đoán; (4) AI không tự sửa code, developer quyết định. Mức độ tin cậy cụ thể của gợi ý cần được đánh giá bằng tiêu chí ở mục 7.
 
 ---
 
@@ -259,10 +272,10 @@ Vì sao:
 
 | Rủi ro          | Câu hỏi                                                           | Mức độ rủi ro (Thấp = an toàn / TB / Cao = nguy hiểm) | Lý do / bằng chứng |
 | --------------- | ----------------------------------------------------------------- | ----------------------------------------------------- | ------------------ |
-| **Value**       | Người dùng có thật sự cần và sẽ dùng không?                       |                                                       |                    |
-| **Usability**   | Người dùng có dùng được, có hiểu và sửa được đầu ra của AI không? |                                                       |                    |
-| **Feasibility** | Có đủ dữ liệu, công cụ, kỹ năng để làm không?                     |                                                       |                    |
-| **Viability**   | Có hợp chi phí, pháp lý, quy định tổ chức không? Ai vận hành?     |                                                       |                    |
+| **Value**       | Người dùng có thật sự cần và sẽ dùng không?                       | TB | Có tín hiệu pain từ 1 phỏng vấn developer (phải lần theo log và các file tham chiếu để tìm nguyên nhân; sửa sai gây "lỗi chồng lỗi"). Nhưng mới 1 người, tần suất 3–5 lỗi/ngày chưa có bằng chứng, thời gian tự ước lượng (10–20 phút bug nhỏ, 1–2 giờ bug lớn) không khớp hẳn giả định 20–45 phút; chưa kiểm chứng được gợi ý có hữu ích hơn việc dán traceback vào công cụ LLM sẵn có (giả định #1–#3). |
+| **Usability**   | Người dùng có dùng được, có hiểu và sửa được đầu ra của AI không? | TB | Thiết kế theo hướng augment: gợi ý kèm căn cứ (dòng log, file liên quan) và bước xác minh, developer quyết định, AI không tự sửa (mục 6.4). Rủi ro còn lại là developer tin gợi ý sai hoặc phải mất thêm thời gian kiểm tra; chưa thử với người dùng thật (giả định #5). |
+| **Feasibility** | Có đủ dữ liệu, công cụ, kỹ năng để làm không?                     | TB | Dữ liệu đầu vào (log, traceback, file tham chiếu) đã có sẵn trong quá trình làm việc của developer. Chưa chứng minh được việc chọn đủ context liên quan mà không gửi toàn bộ mã nguồn hay vượt giới hạn context (giả định #4); phần research giải pháp có sẵn (3.3) chưa làm. |
+| **Viability**   | Có hợp chi phí, pháp lý, quy định tổ chức không? Ai vận hành?     | Cao | Cần đưa log và một phần mã nguồn vào công cụ AI; chưa có bằng chứng về chính sách bảo mật của dự án, chi phí và độ trễ chấp nhận được (giả định #6, bằng chứng 1/5, mức quan trọng 5/5). Không ai được hỏi trực tiếp về vấn đề này trong phỏng vấn. Mức Cao vì chưa biết, không phải vì đã biết là vi phạm; có thể hạ xuống sau khi hỏi chính sách của dự án. |
 
 ### 8.2. Kết luận
 
