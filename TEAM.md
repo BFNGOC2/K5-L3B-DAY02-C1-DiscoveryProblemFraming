@@ -12,9 +12,9 @@
 
 | STT | Họ và tên      | MSSV        | Vai trò trong nhóm                                                       | Tài khoản GitHub |
 | --: | -------------- | ----------- | ------------------------------------------------------------------------ | ---------------- |
-|   1 | Thiều Thế Ngọc     | 2A202603788 | Ghi chép, Phản biện, Phỏng vấn kiểm chứng, research, phân công công việc                                            | BFNGOC2          |
-|   2 | Vũ Tuấn Đạt        | 2A202603744 | Vẽ quy trình, viết Problem Statement, phản biện, phụ giúp nhóm trưởng các task khác                                 | datkunal         |
-|   3 | Trần Trọng Đức Tài | 2A202603732 | Phản biện, Thiết kế quy trình tương lai (4.2), Phân tích mức can thiệp AI (6.2), Problem Statement v1 & Eval (7), Hạn chế & Hướng tiếp theo (9) | DucTai2804       |
+|   1 | Thiều Thế Ngọc     | 2A202603788 | Ghi chép, phản biện, tổng hợp kiểm chứng và research, chấm điểm candidate, Problem Statement v0, AI Canvas (6.3), before/after (4.3), kết luận (8.2) | BFNGOC2          |
+|   2 | Vũ Tuấn Đạt        | 2A202603744 | Gom cluster/OST (2.2–2.3), quy trình hiện tại (4.1), ma trận (6.1), PAIR (6.4), đánh giá 4 rủi ro (8.1), phỏng vấn developer | datkunal         |
+|   3 | Trần Trọng Đức Tài | 2A202603732 | Phản biện, quy trình tương lai (4.2), so sánh mức can thiệp AI (6.2), Problem Statement v1 và tiêu chí đánh giá (7), hạn chế và hướng tiếp theo (9) | DucTai2804       |
 |   4 |                    |             |                                                                                                                     |                  |
 
 Không ghi email hay số điện thoại vào bảng này, vì repo có thể để public.
@@ -23,15 +23,23 @@ Gợi ý vai trò (một người có thể giữ nhiều vai): điều phối t
 
 ## Phân công theo checkpoint
 
-| Checkpoint                                 | Người chính | Người hỗ trợ | Sản phẩm                                       |
-| ------------------------------------------ | ----------- | ------------ | ---------------------------------------------- |
-| CP3 — Hội tụ nhóm                          | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Cluster, cây OST, bảng chấm điểm               |
-| CP4 — Kiểm chứng                           | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Assumption map, snapshot hoặc survey           |
-| CP4 — Research                             | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Bảng research có link                          |
-| CP5 — Quy trình trước/sau                  | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Quy trình + bảng before/after                  |
-| CP5 — Problem Statement v0                 | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Problem Statement v0                           |
-| CP6 — Mức can thiệp + Problem Statement v1 | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | Ma trận, AI Canvas, eval, Problem Statement v1 |
-| CP6 — Quyết định                           | Thiều Thế Ngọc, Vũ Tuấn Đạt, Trần Trọng Đức Tài |              | 4 rủi ro + Go/Not Yet/No-Go                    |
+| Checkpoint | Người chính | Người hỗ trợ | Sản phẩm |
+| ---------- | ----------- | ------------ | -------- |
+| CP3 — Pitch, chấm điểm và chọn candidate | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Bảng điểm và candidate được chọn |
+| CP3 — Cluster và cây OST | Vũ Tuấn Đạt | Trần Trọng Đức Tài | Cluster, cây OST |
+| CP4 — Kiểm chứng (phỏng vấn, hỏi nhanh và tổng hợp snapshot) | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Interview snapshot, kết quả hỏi nhanh, tín hiệu xác nhận/phản bác và giới hạn mẫu |
+| CP4 — Research giải pháp hiện có | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Bảng research có nguồn; Copilot, Sentry và các vấn đề context/bảo mật |
+| CP5 — Quy trình hiện tại (4.1) | Vũ Tuấn Đạt | Thiều Thế Ngọc, Trần Trọng Đức Tài | Sơ đồ, bảng bước và bottleneck |
+| CP5 — Quy trình tương lai (4.2) | Trần Trọng Đức Tài | Vũ Tuấn Đạt, Thiều Thế Ngọc | Quy trình Rule/AI/con người, boundary và fallback |
+| CP5 — Before/after (4.3) | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Bảng so sánh quy trình và chỉ số |
+| CP5 — Problem Statement v0 | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Problem Statement v0 |
+| CP6 — Ma trận (6.1) và câu hỏi PAIR (6.4) | Vũ Tuấn Đạt | Thiều Thế Ngọc, Trần Trọng Đức Tài | Phân loại độ mơ hồ/độ phức tạp; augment/automate và báo nhầm/bỏ sót |
+| CP6 — So sánh 4 mức can thiệp AI (6.2) | Trần Trọng Đức Tài | Vũ Tuấn Đạt, Thiều Thế Ngọc | Lập luận lựa chọn Workflow |
+| CP6 — AI Canvas (6.3) | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | AI Canvas |
+| CP6 — Problem Statement v1 và tiêu chí đánh giá (7) | Trần Trọng Đức Tài | Thiều Thế Ngọc, Vũ Tuấn Đạt | Problem Statement v1, tiêu chí đầu ra AI |
+| CP6 — Đánh giá rủi ro (8.1) | Vũ Tuấn Đạt | Thiều Thế Ngọc, Trần Trọng Đức Tài | Value, Usability, Feasibility, Viability |
+| CP6 — Kết luận quyết định (8.2) | Thiều Thế Ngọc | Vũ Tuấn Đạt, Trần Trọng Đức Tài | Quyết định Not Yet và lý do |
+| CP6 — Hạn chế và hướng tiếp theo (9) | Trần Trọng Đức Tài | Thiều Thế Ngọc, Vũ Tuấn Đạt | Hạn chế thực nghiệm và đề xuất bước tiếp theo |
 
 ## Cá nhân
 
